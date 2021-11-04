@@ -1,0 +1,78 @@
+<odoo>
+  <data>
+    <!-- master.area tree view -->
+    <record id="master_area_view_tree" model="ir.ui.view">
+      <field name="name">master.area.view.tree</field>
+      <field name="model">master.area</field>
+      <field name="arch" type="xml">
+        <tree>
+          <!-- Add your fields here -->
+          <field name="province_name"/>
+          <field name="city_name"/>
+          <field name="name"/>
+          <field name="farming_area"/>
+          <field name="corn_area"/>
+          <field name="rice_area"/>
+          <field name="plantation_area"/>
+          <field name="horticulture_area"/>
+        </tree>
+      </field>
+    </record>
+    <!-- master.area form view -->
+    <record id="master_area_view_form" model="ir.ui.view">
+      <field name="name">master.area.view.form</field>
+      <field name="model">master.area</field>
+      <field name="arch" type="xml">
+        <form string="Delivery Order">
+          <sheet>
+            <group string="Information">
+              <!-- Add your fields here -->
+              <field name="zone_id" required="1"  />
+              <field name="disrict_code" required="1"  />
+              <field name="province_code" required="1"  />
+              <field name="province_name" required="1"  />
+              <field name="district_prov_code" required="1"  />
+              <field name="district_prov_name" required="1"  />
+              <field name="city_code" required="1"  />
+              <field name="city_name" required="1"  />
+              <field name="kec_code" required="1"  />
+              <field name="name" required="1"  />
+              <field name="num_villages" required="1"  />
+              <field name="area_category" required="1"  />
+            </group>
+            <group string="Area">
+              <field name="farming_area"  />
+              <field name="corn_area"  />
+              <field name="rice_area" />
+              <field name="plantation_area" />
+              <field name="horticulture_area" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- master.area action window -->
+    <record id="master_area_action" model="ir.actions.act_window">
+      <field name="name">Master Area</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">master.area</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          <!-- Add Text Here -->
+          click create to add new item
+        </p><p>
+          <!-- More details about what a user can do with this object will be OK -->
+          
+        </p>
+      </field>
+    </record>
+	
+    <menuitem id="db_marketing_root" name="DB Marketing" sequence="10"/>
+    <menuitem id="db_marketing_config_menu_categ" name="Configuration" parent="db_marketing_root" sequence="90"/>
+	  <menuitem id="db_marketing_menu_categ" name="Menu" parent="db_marketing_root" sequence="80"/>
+    <menuitem id="master_area_menu_act" name="Master Area" parent="db_marketing_config_menu_categ" action="master_area_action" sequence="40"/>
+  </data>
+</odoo>

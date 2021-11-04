@@ -1,0 +1,79 @@
+<odoo>
+  <data>
+	 <!-- db.kios tree view -->
+    <record id="db_kios_view_tree" model="ir.ui.view">
+      <field name="name">db.kios.view.tree</field>
+      <field name="model">db.kios</field>
+      <field name="arch" type="xml">
+        <tree>
+          <!-- Add your fields here -->
+          <field name="kios_id"/>
+          <field name="name"/>
+          <field name="kios_address"/>
+		      <field name="city_name"/>
+          <field name="kios_owner"/>
+          <field name="kios_tlpn"/>
+          <field name="kios_npwp"/>
+          <field name="kios_namanpwp"/>
+          <field name="kios_koordinat"/>
+		      <field name="kios_emp"/>
+          <field name="kios_supervisor"/>
+		  
+        </tree>
+      </field>
+    </record>
+	
+    <!-- db.kios form view -->
+    <record id="db_kios_view_form" model="ir.ui.view">
+      <field name="name">db.kios.view.form</field>
+      <field name="model">db.kios</field>
+      <field name="arch" type="xml">
+        <form string="Delivery Order">
+          <sheet>
+            <group string="Information">
+              <!-- Add your fields here -->
+              <field name="kios_id" readonly="1"  />
+              <field name="name" required="1"  />
+              <field name="kios_address"  />
+              <field name="kios_owner"   />
+              <field name="kios_tlpn" />
+              <field name="kios_npwp"  />
+              <field name="kios_namanpwp"   />
+              <field name="kios_koordinat"   />
+              <field name="kios_emp" />
+              <field name="kios_supervisor"   />
+            </group>
+            <group string="Area">
+              <field name="area_id" />
+              <field name="city_name"/>
+              <field name="district_prov_name"/>
+              <field name="province_name"/>
+		        </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+	
+
+    <!-- db.kios action window -->
+    <record id="db_kios_action" model="ir.actions.act_window">
+      <field name="name">Kios</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">db.kios</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          <!-- Add Text Here -->
+          click create to add new item
+        </p><p>
+          <!-- More details about what a user can do with this object will be OK -->
+          
+        </p>
+      </field>
+    </record>
+	
+	<menuitem id="kios_menu_act" name="Kios" parent="db_marketing_menu_categ" action="db_kios_action" sequence="50"/>
+	
+  </data>
+</odoo>

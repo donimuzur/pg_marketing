@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "pg_marketing",
-
+    'name': "PG DB marketing",
+    
     'summary': """
         Database Marketing
     """,
@@ -21,7 +21,8 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml',
+        'views/master_area.xml',
+        'views/db_kios.xml',
     ],
 }
 
