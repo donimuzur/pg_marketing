@@ -3,3 +3,4 @@
 from . import master_area
 from . import wizard_id_generator
 from . import db_kios
+from . import db_penjualan

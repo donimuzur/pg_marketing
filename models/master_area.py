@@ -21,4 +21,5 @@ class MasterArea(models.Model):
     rice_area= fields.Integer(string='Rice Area', default='0')
     plantation_area= fields.Integer(string='Plantation Area', default='0')
     horticulture_area= fields.Integer(string='Horticulture Area', default='0')
+    potential_market_area= fields.Integer(string='Potential Market Area', default='0')
    

@@ -23,6 +23,7 @@
         'security/ir.model.access.csv',
         'views/master_area.xml',
         'views/db_kios.xml',
+        'views/db_penjualan.xml',
     ],
 }
 

@@ -15,6 +15,7 @@
           <field name="rice_area"/>
           <field name="plantation_area"/>
           <field name="horticulture_area"/>
+          <field name="potential_market_area" />
         </tree>
       </field>
     </record>
@@ -46,6 +47,7 @@
               <field name="rice_area" />
               <field name="plantation_area" />
               <field name="horticulture_area" />
+              <field name="potential_market_area" />
             </group>
           </sheet>
         </form>

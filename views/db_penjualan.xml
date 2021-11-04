@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+	 <!-- db.penjualan tree view -->
+    <record id="db_penjualan_view_tree" model="ir.ui.view">
+      <field name="name">db.penjualan.view.tree</field>
+      <field name="model">db.penjualan</field>
+      <field name="arch" type="xml">
+        <tree>
+          <!-- Add your fields here -->
+            <field name="name"/>
+            <field name="kios_address" readonly="1"/>
+            <field name="emp_name"/>
+            <field name="month"/>
+            <field name="year"/>
+            <field name="stocks"/>
+            <field name="sales"/>
+        </tree>
+      </field>
+    </record>
+	
+    <!-- db.penjualan form view -->
+    <record id="db_penjualan_view_form" model="ir.ui.view">
+      <field name="name">db.penjualan.view.form</field>
+      <field name="model">db.penjualan</field>
+      <field name="arch" type="xml">
+        <form string="Delivery Order">
+            <sheet>
+                <group string="Information">
+                <!-- Add your fields here -->
+                    <field name="name" />
+                    <field name="kios_address" />
+                    <field name="kec_name" />
+                    <field name="province_name" />
+                    <field name="emp_name" />
+                    <field name="month"  />
+                    <field name="year"   />
+                    <field name="product" />
+                    <field name="stocks"  />
+                    <field name="sales"   />
+                </group>
+             </sheet>
+        </form>
+      </field>
+    </record>
+	
+
+    <!-- db.penjualan action window -->
+    <record id="db_penjualan_action" model="ir.actions.act_window">
+      <field name="name">Penjualan Kios</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">db.penjualan</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          <!-- Add Text Here -->
+          click create to add new item
+        </p><p>
+          <!-- More details about what a user can do with this object will be OK -->
+          
+        </p>
+      </field>
+    </record>
+	
+	<menuitem id="penjualan_kios_menu_act" name="Data Penjualan Kios" parent="db_marketing_menu_categ" action="db_penjualan_action" sequence="60"/>
+	
+  </data>
+</odoo>
