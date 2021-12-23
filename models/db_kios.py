@@ -2,6 +2,7 @@ import base64
 import threading
 
 from odoo import models, fields, tools, api, _
+from odoo.modules.module import get_module_resource
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import pycompat
  
@@ -16,9 +17,7 @@ class DbKios(models.Model):
             return False
 
         colorize, img_path, image = False, False, False
-
-    
-        img_path = get_module_resource('base', 'static/img', 'company_image.png')
+        img_path = get_module_resource('pg_marketing', 'static/image', 'default_kios_img.jpg')
 
         if img_path:
             with open(img_path, 'rb') as f:
@@ -50,7 +49,39 @@ class DbKios(models.Model):
         if not values['image']:
                 values['image'] = self._get_default_image()
         tools.image_resize_images(values, sizes={'image': (1024, None)})
+        
+        try:
+            if not values['partner_latitude']:
+                values['partner_latitude']= self.partner_latitude
+        except:
+            values['partner_latitude']= self.partner_latitude
+        
+        try:
+            if not values['partner_longitude']:
+                values['partner_longitude']= self.partner_longitude
+        except:
+            values['partner_longitude']= self.partner_longitude        
+        
+        values['map_url'] = 'https://maps.google.com/?ll=%s,%s' % (values['partner_latitude'],  values['partner_longitude'])
         res = super(DbKios,self).create(values)
+        return res
+
+    @api.multi
+    def write(self, values):
+        try:
+            if not values['partner_latitude']:
+                values['partner_latitude']= self.partner_latitude
+        except:
+            values['partner_latitude']= self.partner_latitude
+        
+        try:
+            if not values['partner_longitude']:
+                values['partner_longitude']= self.partner_longitude
+        except:
+            values['partner_longitude']= self.partner_longitude        
+        
+        values['map_url'] = 'https://maps.google.com/?ll=%s,%s' % (values['partner_latitude'],  values['partner_longitude'])
+        res = super(DbKios, self).write(values)
         return res
 
     name= fields.Char(string='Kios Name')
@@ -64,21 +95,13 @@ class DbKios(models.Model):
     kios_supervisor = fields.Char(string='Kios Supervisor')
     active = fields.Boolean(default=True)
 
-    partner_latitude = fields.Float(string='Geo Latitude', digits=(16, 5))
-    partner_longitude = fields.Float(string='Geo Longitude', digits=(16, 5))
+    partner_latitude = fields.Float(string='Geo Latitude', digits=(16, 10), default=0)
+    partner_longitude = fields.Float(string='Geo Longitude', digits=(16, 10), default=0)
     date_localization = fields.Date(string='Geolocation Date')
-    
+    map_url = fields.Char(string='Maps Url')
     # image: all image fields are base64 encoded and PIL-supported
     image = fields.Binary("Image", attachment=True,
         help="This field holds the image used as avatar for this contact, limited to 1024x1024px",)
-    image_medium = fields.Binary("Medium-sized image", attachment=True,
-        help="Medium-sized image of this contact. It is automatically "\
-             "resized as a 128x128px image, with aspect ratio preserved. "\
-             "Use this field in form views or some kanban views.")
-    image_small = fields.Binary("Small-sized image", attachment=True,
-        help="Small-sized image of this contact. It is automatically "\
-             "resized as a 64x64px image, with aspect ratio preserved. "\
-             "Use this field anywhere a small image is required.")
 
     area_id = fields.Many2one('master.area', string='Kecamatan', required=True)
 
@@ -86,3 +109,13 @@ class DbKios(models.Model):
     district_prov_name = fields.Char('District Province Name', related='area_id.district_prov_name')
     city_name = fields.Char('City Name', related='area_id.city_name')
     
+    @api.one
+    def btn_view_google_map(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'name':'btn_view_google_map',
+            'url': "https://maps.google.com/?ll=0,0",
+            'target': 'self'
+        } 
+    
+
